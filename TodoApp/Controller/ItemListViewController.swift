@@ -9,12 +9,18 @@
 import UIKit
 import CoreData
 
-class TodoListViewController: UITableViewController {
+class ItemListViewController: UITableViewController {
 
     var itemArray = [Item]()
+    var selectedCategory : Category?{
+        didSet{
+            loadData()
+        }
+    }
     
     let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         loadData()
         // Do any additional setup after loading the view.
@@ -29,7 +35,7 @@ class TodoListViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell=tableView.dequeueReusableCell(withIdentifier: "todoViewCell", for: indexPath)
-        cell.textLabel?.text=itemArray[indexPath.row].titel
+        cell.textLabel?.text=itemArray[indexPath.row].title
         if itemArray[indexPath.row].done {
             cell.accessoryType = .checkmark
         }else {
@@ -54,9 +60,9 @@ class TodoListViewController: UITableViewController {
         let action=UIAlertAction(title: "Add Item", style: .default) { (action) in
             
             let newItem=Item(context: self.contex)
-            newItem.titel=textField.text!
+            newItem.title=textField.text!
             newItem.done=false
-             
+            newItem.parentCategory = self.selectedCategory
             self.saveItems()
             self.loadData()
             self.tableView.reloadData()
@@ -85,16 +91,42 @@ class TodoListViewController: UITableViewController {
         
     }
     //MARK:- Loading data
-    func loadData() {
-        let request:NSFetchRequest<Item>=Item.fetchRequest()
+    func loadData(with request:NSFetchRequest<Item>=Item.fetchRequest(),predicat:NSPredicate? = nil) {
+        let categoryPridecate = NSPredicate(format:"parentCategory == %@", selectedCategory!)
+        if let additionalPredicate=predicat{
+            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate,categoryPridecate])
+        }else {
+            request.predicate=categoryPridecate
+        }
         do{
             itemArray=try contex.fetch(request)
         }catch{
-            print("could not load data ")
+            print(error)
         }
     }
    //MARK:- Deleting
-    
+ 
     
 }
-
+//MARK:- SearchBar extention
+  extension ItemListViewController:UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request : NSFetchRequest<Item>=Item.fetchRequest()
+        let predicate = NSPredicate(format:"title CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors=[NSSortDescriptor(key:"title", ascending: true)]
+        
+        loadData(with: request,predicat: predicate)
+        tableView.reloadData()
+        
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            self.loadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            tableView.reloadData()
+        }
+    }
+    }
+  
