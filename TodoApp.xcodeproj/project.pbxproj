@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42119E3D23C36DE500ED5BD9 /* SwipTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42119E3C23C36DE500ED5BD9 /* SwipTableViewController.swift */; };
 		4212991323B9EE0100AE9281 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4212991223B9EE0100AE9281 /* Default-568h@2x.png */; };
 		4243F5CB23BB3F7C00023440 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243F5CA23BB3F7C00023440 /* CategoryViewController.swift */; };
 		4251557323C2557A00D5FAB5 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4251557223C2557A00D5FAB5 /* Category.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		0A515744FF7DF507439CD214 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
+		42119E3C23C36DE500ED5BD9 /* SwipTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipTableViewController.swift; sourceTree = "<group>"; };
 		4212991223B9EE0100AE9281 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4243F5CA23BB3F7C00023440 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4251557223C2557A00D5FAB5 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				4243F5CA23BB3F7C00023440 /* CategoryViewController.swift */,
 				4290D51B23B7A9B40093548C /* ItemListViewController.swift */,
+				42119E3C23C36DE500ED5BD9 /* SwipTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				4290D51C23B7A9B40093548C /* ItemListViewController.swift in Sources */,
 				4290D51823B7A9B40093548C /* AppDelegate.swift in Sources */,
 				428DDE0E23C2585100DAF80B /* Item.swift in Sources */,
+				42119E3D23C36DE500ED5BD9 /* SwipTableViewController.swift in Sources */,
 				4290D51A23B7A9B40093548C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

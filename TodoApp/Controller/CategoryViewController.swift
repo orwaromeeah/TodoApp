@@ -2,19 +2,21 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController:SwipTableViewController {
     var categoryArray : Results<Category>?
     
     let realm = try! Realm()
     
-    let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+    
     override func viewDidLoad() {
-     
+
+        
         loadData()
         tableView.reloadData()
         super.viewDidLoad()
- 
+        tableView.rowHeight=80
 
     }
     @IBAction func addCategoryPressed(_ sender: UIBarButtonItem) {
@@ -44,7 +46,9 @@ class CategoryViewController: UITableViewController {
 
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell=tableView.dequeueReusableCell(withIdentifier: "categoryViewCell", for: indexPath)
+    let cell=super.tableView(tableView, cellForRowAt: indexPath)
+    
+    
     cell.textLabel?.text=categoryArray?[indexPath.row].name ?? "not Categories to show"
         return cell
     }
@@ -87,6 +91,21 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
         }
         
     }
+    override func updateDate(at indexPath: IndexPath) {
+        if let markedCategory = self.categoryArray?[indexPath.row]{
+                          do{
+                              try  self.realm.write {
+                              self.realm.delete(markedCategory)
+                              }
+                          }catch{ print(error)}
+                      }
+        self.loadData()
+        
+    }
 
 
 }
+
+
+    
+

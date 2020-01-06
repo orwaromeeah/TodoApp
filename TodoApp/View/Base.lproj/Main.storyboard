@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Category View Controller-->
+        <!--Categories -->
         <scene sceneID="LX0-jY-6tV">
             <objects>
                 <tableViewController id="3aG-eN-zH3" customClass="CategoryViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryViewCell" id="2dC-nb-lEI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="2dC-nb-lEI" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2dC-nb-lEI" id="N8l-dK-xd1">
@@ -29,7 +29,7 @@
                             <outlet property="delegate" destination="3aG-eN-zH3" id="YKt-ZU-5sg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6vE-uF-c60">
+                    <navigationItem key="navigationItem" title="Categories " id="6vE-uF-c60">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nio-lw-bhS">
                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <connections>
@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="1297" y="134"/>
         </scene>
-        <!--Item List View Controller-->
+        <!--Things to do-->
         <scene sceneID="zDX-zM-gPh">
             <objects>
                 <tableViewController id="IKc-p7-7Ah" customClass="ItemListViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -62,7 +62,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todoViewCell" id="Cjw-0d-UDs">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Cjw-0d-UDs" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="72" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cjw-0d-UDs" id="Oo2-Yh-jdK">
@@ -76,7 +76,7 @@
                             <outlet property="delegate" destination="IKc-p7-7Ah" id="xpu-My-xSj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="d1c-s1-ayN">
+                    <navigationItem key="navigationItem" title="Things to do" id="d1c-s1-ayN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ttW-2M-S7G">
                             <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <connections>

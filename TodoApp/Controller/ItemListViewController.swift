@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ItemListViewController: UITableViewController {
+class ItemListViewController: SwipTableViewController{
     
     let realm=try! Realm()
     var toDoItems : Results<Item>?
@@ -19,9 +19,9 @@ class ItemListViewController: UITableViewController {
         }
     }
     
-    let contex = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
-        
+        tableView.rowHeight=60
         super.viewDidLoad()
         loadData()
         // Do any additional setup after loading the view.
@@ -35,7 +35,7 @@ class ItemListViewController: UITableViewController {
         return toDoItems?.count ?? 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell=tableView.dequeueReusableCell(withIdentifier: "todoViewCell", for: indexPath)
+        let cell=super.tableView(tableView, cellForRowAt: indexPath)
         if let item=toDoItems?[indexPath.row]{
             cell.textLabel?.text=item.title
             cell.accessoryType=item.done ? .checkmark : .none
@@ -106,10 +106,20 @@ class ItemListViewController: UITableViewController {
             toDoItems=selectedCategory?.items.sorted(byKeyPath:"title")
         
     }
-}
+
    //MARK:- Deleting
  
-    
+    override func updateDate(at indexPath: IndexPath) {
+    if let markedItem = self.toDoItems?[indexPath.row]{
+                      do{
+                          try  self.realm.write {
+            self.realm.delete(markedItem)
+            }
+            }catch{ print(error)}
+                  }
+    self.loadData()
+}
+}
 
 //MARK:- SearchBar extention
   extension ItemListViewController:UISearchBarDelegate{
